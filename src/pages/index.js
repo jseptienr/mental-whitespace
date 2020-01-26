@@ -1,9 +1,13 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 
-import Bio from "../components/bio"
+//import Bio from "../components/bio"
+
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+
+import Button from "react-bootstrap/Button"
+
 import { rhythm } from "../utils/typography"
 
 class BlogIndex extends React.Component {
@@ -15,22 +19,23 @@ class BlogIndex extends React.Component {
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title="All posts" />
-        <Bio />
+        { /* <Bio /> */}
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
           return (
             <article key={node.fields.slug}>
               <header>
-                <h3
+                <h1
                   style={{
-                    marginBottom: rhythm(1 / 4),
+                    marginBottom: rhythm(1 / 2),
+                    textAlign: 'center',
                   }}
                 >
-                  <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
+                  <Link className="post-link" style={{ boxShadow: `none`, fontWeight: `400`, }} to={node.fields.slug}>
                     {title}
                   </Link>
-                </h3>
-                <small>{node.frontmatter.date}</small>
+                </h1>
+                <p style={{fontFamily: 'montserrat', textAlign: 'center', letterSpacing: '2px',}}><small>{node.frontmatter.date}</small></p>
               </header>
               <section>
                 <p
@@ -39,6 +44,9 @@ class BlogIndex extends React.Component {
                   }}
                 />
               </section>
+              <Button className="read-more-btn">
+                <Link to={node.fields.slug}>READ MORE</Link>
+              </Button>
             </article>
           )
         })}

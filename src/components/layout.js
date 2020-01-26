@@ -1,72 +1,61 @@
 import React from "react"
 import { Link } from "gatsby"
 
+import Nav from "react-bootstrap/Nav"
+import Navbar from "react-bootstrap/Navbar"
+import NavDropdown from "react-bootstrap/NavDropdown"
+import Form from "react-bootstrap/Form"
+import FormControl from "react-bootstrap/FormControl"
+import Container from "react-bootstrap/Container"
+
 import { rhythm, scale } from "../utils/typography"
 
 class Layout extends React.Component {
   render() {
     const { location, title, children } = this.props
     const rootPath = `${__PATH_PREFIX__}/`
-    let header
-
-    if (location.pathname === rootPath) {
-      header = (
-        <h1
-          style={{
-            ...scale(1.5),
-            marginBottom: rhythm(1.5),
-            marginTop: 0,
-          }}
-        >
-          <Link
-            style={{
-              boxShadow: `none`,
-              textDecoration: `none`,
-              color: `inherit`,
-            }}
-            to={`/`}
-          >
-            {title}
-          </Link>
-        </h1>
-      )
-    } else {
-      header = (
-        <h3
-          style={{
-            fontFamily: `Montserrat, sans-serif`,
-            marginTop: 0,
-          }}
-        >
-          <Link
-            style={{
-              boxShadow: `none`,
-              textDecoration: `none`,
-              color: `inherit`,
-            }}
-            to={`/`}
-          >
-            {title}
-          </Link>
-        </h3>
-      )
-    }
+    let header = (
+      <header>
+        <Navbar style={{borderBottom: '#ddd solid 1px'}} sticky="top" >
+          <Navbar.Brand >
+            <h3 className="site-title"><Link className="nav-link"  style={{boxShadow: `none`, color: `#333`}} to="/">{title}</Link></h3>
+          </Navbar.Brand>
+          <Nav style={{marginTop: rhythm(1 / 2)}} className="ml-auto">
+            <Nav.Item as="li">
+              <Link className="nav-link"  style={{boxShadow: `none`}} to="/">Home</Link>
+            </Nav.Item>
+            <Nav.Item as="li">
+              <Link  className="nav-link" style={{boxShadow: `none`}} to="/about">About</Link>
+            </Nav.Item>
+            <Nav.Item as="li">
+              <Link  className="nav-link" style={{boxShadow: `none`}} to="/contact">Contact</Link>
+            </Nav.Item>
+          </Nav>
+        </Navbar>
+      </header>
+    )
     return (
-      <div
-        style={{
-          marginLeft: `auto`,
-          marginRight: `auto`,
-          maxWidth: rhythm(24),
-          padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
-        }}
-      >
-        <header>{header}</header>
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+      <div>
+        <div>
+          <header>{header}</header>
+        </div>
+        <div
+          style={{
+            marginLeft: `auto`,
+            marginRight: `auto`,
+            maxWidth: rhythm(25),
+            padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
+          }}
+        >
+          <main>{children}</main>
+          <footer>
+            <p style={{textAlign: 'center',}}>
+              © {new Date().getFullYear()} Mental Whitespace, built with
+              {` `}
+              <a href="https://www.gatsbyjs.org">Gatsby</a>
+            </p>
+          </footer>
+        </div>
       </div>
     )
   }
